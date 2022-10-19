@@ -4,14 +4,6 @@ import {Header, AddTask, Task} from ".";
 const Layout = () => {
   const [isActive, setisActive] = useState(false);
 
-  useEffect(() => {
-    first;
-
-    return () => {
-      second;
-    };
-  }, [third]);
-
   const Data = [
     {
       id: new Date().getMilliseconds(),
@@ -21,12 +13,18 @@ const Layout = () => {
     },
   ];
 
+  //Func
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
+  //Func section is done
   return (
     <div className="mt-[2.5rem] w-[40rem] bg-pink-500 pb-10">
       <Header active={isActive} setActive={setisActive} />
       {isActive && (
         <div className="w-[30rem] mx-auto d">
-          <AddTask />
+          <AddTask handleSubmit={handleSubmit} />
         </div>
       )}
       {Data.map((item, idx) => (

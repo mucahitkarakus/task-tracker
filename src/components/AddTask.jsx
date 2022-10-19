@@ -1,8 +1,8 @@
 import React from "react";
 
-const AddTask = () => {
+const AddTask = ({handleSubmit}) => {
   return (
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className="space-y-5">
         <div className="flex flex-col">
           <label className="text-xl mb-1 text-white" htmlFor="TaskName">
