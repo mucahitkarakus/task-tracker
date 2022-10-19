@@ -22,6 +22,7 @@ const Layout = () => {
       date: e.target.selectt.value,
       complated: false,
     };
+    setData([...data, newTodo]);
   };
 
   //Func section is done
