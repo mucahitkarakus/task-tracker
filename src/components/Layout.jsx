@@ -35,7 +35,7 @@ const Layout = () => {
         </div>
       )}
       {data.length !== 0 ? (
-        <div>
+        <div className="max-h-[25rem] overflow-y-auto">
           {data.map((item, idx) => (
             <div>
               <Task data={item} />
