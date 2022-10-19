@@ -24,6 +24,10 @@ const Layout = () => {
     };
     setData([...data, newTodo]);
   };
+  //Delete Func
+  const handleRemove = (id) => {
+    setData(data.filter((todo) => todo.id !== id));
+  };
 
   //Func section is done
   return (
@@ -37,8 +41,8 @@ const Layout = () => {
       {data.length !== 0 ? (
         <div className="max-h-[25rem] overflow-y-auto">
           {data.map((item, idx) => (
-            <div>
-              <Task data={item} />
+            <div key={idx}>
+              <Task data={item} handleRemove={handleRemove} />
             </div>
           ))}
         </div>
