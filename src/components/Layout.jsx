@@ -4,6 +4,14 @@ import {Header, AddTask, Task} from ".";
 const Layout = () => {
   const [isActive, setisActive] = useState(false);
 
+  useEffect(() => {
+    first;
+
+    return () => {
+      second;
+    };
+  }, [third]);
+
   const Data = [
     {
       id: new Date().getMilliseconds(),
@@ -23,7 +31,7 @@ const Layout = () => {
       )}
       {Data.map((item, idx) => (
         <div key={idx}>
-          <Task />
+          <Task data={item} />
         </div>
       ))}
     </div>
