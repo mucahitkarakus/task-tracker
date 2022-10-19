@@ -1,12 +1,17 @@
 import React, {useState} from "react";
-import {Header} from ".";
+import {Header, AddTask} from ".";
 
 const Layout = () => {
   const [isActive, setisActive] = useState(false);
 
   return (
-    <div>
+    <div className="mt-[2.5rem] w-[40rem] bg-pink-500 pb-10">
       <Header active={isActive} setActive={setisActive} />
+      {isActive && (
+        <div>
+          <AddTask />
+        </div>
+      )}
     </div>
   );
 };
