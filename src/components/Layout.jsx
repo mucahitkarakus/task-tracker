@@ -1,8 +1,17 @@
 import React, {useState} from "react";
-import {Header, AddTask} from ".";
+import {Header, AddTask, Task} from ".";
 
 const Layout = () => {
   const [isActive, setisActive] = useState(false);
+
+  const Data = [
+    {
+      id: new Date().getMilliseconds(),
+      title: `Alpha Team`,
+      date: `Dec 12 12.00PM`,
+      complated: false,
+    },
+  ];
 
   return (
     <div className="mt-[2.5rem] w-[40rem] bg-pink-500 pb-10">
@@ -12,6 +21,11 @@ const Layout = () => {
           <AddTask />
         </div>
       )}
+      {Data.map((item, idx) => (
+        <div key={idx}>
+          <Task />
+        </div>
+      ))}
     </div>
   );
 };
