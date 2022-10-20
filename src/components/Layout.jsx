@@ -1,18 +1,10 @@
-import React, {useState} from "react";
-import {Header, AddTask, Task} from ".";
+import React, {useState, useEffect} from "react";
+import {Header, AddTask, Task} from "./";
 
 const Layout = () => {
   const [isActive, setIsActive] = useState(false);
-  const [data, setData] = useState([
-    {
-      id: new Date().getMilliseconds(),
-      title: "The Alpha Team",
-      date: "Dec 12 12.00PM",
-      complated: false,
-    },
-  ]);
+  const [data, setData] = useState([]);
 
-  // Func
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
@@ -22,14 +14,14 @@ const Layout = () => {
       complated: false,
     };
     setData([...data, newTodo]);
+    setTodoToLocalStorage(newTodo);
   };
 
-  // Delete Func
   const handleRemove = (id) => {
     setData(data.filter((todo) => todo.id !== id));
+    deleteTodoToStorage(id);
   };
 
-  // Complated Func
   const handleComplated = (id) => {
     const updatedData = data.map((todo) => {
       if (todo.id === id) {
@@ -39,7 +31,8 @@ const Layout = () => {
     });
     setData(updatedData);
   };
-  // Func Section is Done
+
+  // LocalStorage Section
   const getData = () => {
     let todos;
     if (localStorage.getItem("todos") === null) {
@@ -75,16 +68,18 @@ const Layout = () => {
     loadAllData();
     console.log("This area is working right now");
   }, []);
+
+  // LocalStoraga Section is Done
   return (
     <div className="mt-[2.5rem] w-[40rem] bg-pink-500 pb-10">
       <Header active={isActive} setActive={setIsActive} />
       {isActive && (
-        <div className="w-[30rem] mx-auto">
+        <div className="w-[30rem] mx-auto pb-10">
           <AddTask handleSubmit={handleSubmit} />
         </div>
       )}
       {data.length !== 0 ? (
-        <div className="max-h-[25rem] overflow-y-auto">
+        <div className="max-h-[25rem] overflow-y-auto scrollbar-thumb-gray-900 scrollbar-track-gray-100 scrollbar-thin">
           {data.map((item, idx) => (
             <div key={idx}>
               <Task
@@ -96,7 +91,7 @@ const Layout = () => {
           ))}
         </div>
       ) : (
-        <p className="text-center text-xl font-semibold">No Task Yet</p>
+        <p className="text-center text-xl font-semibold">No task yet</p>
       )}
     </div>
   );
