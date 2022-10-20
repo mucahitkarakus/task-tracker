@@ -40,6 +40,41 @@ const Layout = () => {
     setData(updatedData);
   };
   // Func Section is Done
+  const getData = () => {
+    let todos;
+    if (localStorage.getItem("todos") === null) {
+      todos = [];
+    } else {
+      todos = JSON.parse(localStorage.getItem("todos"));
+    }
+    return todos;
+  };
+
+  const setTodoToLocalStorage = (newTodo) => {
+    let todo = getData();
+    todo.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify([...todo]));
+  };
+
+  const deleteTodoToStorage = (deleteTodoID) => {
+    let todos = getData();
+
+    todos.forEach((todo, idx) => {
+      if (todo.id === deleteTodoID) {
+        todos.splice(idx, 1);
+      }
+    });
+    localStorage.setItem("todos", JSON.stringify([...todos]));
+  };
+
+  const loadAllData = () => {
+    let todos = getData();
+    setData([...todos]);
+  };
+  useEffect(() => {
+    loadAllData();
+    console.log("This area is working right now");
+  }, []);
   return (
     <div className="mt-[2.5rem] w-[40rem] bg-pink-500 pb-10">
       <Header active={isActive} setActive={setIsActive} />
